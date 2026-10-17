@@ -10,7 +10,7 @@ st.set_page_config(
 )
 
 # 2. Main Page Header
-st.title("🤖 My Custom AI Assistant")
+st.title("🤖 My Zybo AI Assistant")
 st.caption("Powered by Google Gemini")
 
 # Retrieve API key securely
