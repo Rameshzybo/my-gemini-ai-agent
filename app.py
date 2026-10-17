@@ -11,7 +11,7 @@ st.set_page_config(
 )
 
 # 2. Display Zybo Logo and Header
-st.image("https://raw.githubusercontent.com/Rameshzybo/my-gemini-ai-agent/main/logo.png", width=220)
+st.image("https://raw.githubusercontent.com/Rameshzybo/my-gemini-ai-agent/main/logo.png.png", width=220)
 
 st.title("My Zybo AI Assistant")
 st.caption("Powered by Google Gemini")
