@@ -1,4 +1,5 @@
 import os
+import json
 import streamlit as st
 from google import genai
 
@@ -13,6 +14,22 @@ st.set_page_config(
 st.title("🤖 My Zybo AI Assistant")
 st.caption("Powered by Google Gemini")
 
+# 3. Local File for Storing Chat History
+CHAT_HISTORY_FILE = "chat_history.json"
+
+def load_chat_history():
+    if os.path.exists(CHAT_HISTORY_FILE):
+        try:
+            with open(CHAT_HISTORY_FILE, "r") as f:
+                return json.load(f)
+        except Exception:
+            return []
+    return []
+
+def save_chat_history(messages):
+    with open(CHAT_HISTORY_FILE, "w") as f:
+        json.dump(messages, f, indent=2)
+
 # Retrieve API key securely
 api_key = st.secrets.get("GEMINI_API_KEY", os.environ.get("GEMINI_API_KEY"))
 
@@ -22,14 +39,15 @@ def get_client():
 
 client = get_client()
 
-# 3. System Instruction / Behavior (Optional Customization)
+# 4. System Instruction / Behavior & Chat Session
 if "chat" not in st.session_state:
     st.session_state.chat = client.chats.create(
         model="gemini-3.8-flash"
     )
 
+# Load saved messages into session state
 if "messages" not in st.session_state:
-    st.session_state.messages = []
+    st.session_state.messages = load_chat_history()
 
 # Display chat history
 for message in st.session_state.messages:
@@ -46,3 +64,6 @@ if user_input := st.chat_input("Ask me anything..."):
     st.session_state.messages.append({"role": "assistant", "content": response.text})
     with st.chat_message("assistant"):
         st.markdown(response.text)
+
+    # Save the updated conversation to the local file
+    save_chat_history(st.session_state.messages)
