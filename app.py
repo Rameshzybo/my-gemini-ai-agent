@@ -11,7 +11,7 @@ st.set_page_config(
 )
 
 # 2. Display Zybo Logo and Header
-if os.path.exists("logo.png"):
+if os.path.exists("https://raw.githubusercontent.com/Rameshzybo/my-gemini-ai-agent/main/logo.png"):
     st.image("logo.png", width=220)  # Adjust width as needed
 
 st.title("My Zybo AI Assistant")
