@@ -4,7 +4,7 @@ from google import genai
 
 # 1. Page Configuration (Browser tab title & icon)
 st.set_page_config(
-    page_title="My Custom AI Assistant",  # Change the browser tab title
+    page_title="My zybo AI Assistant",  # Change the browser tab title
     page_icon="🤖",                        # Change the browser icon (emoji)
     layout="centered"                     # Options: "centered" or "wide"
 )
