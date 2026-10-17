@@ -5,13 +5,16 @@ from google import genai
 
 # 1. Page Configuration (Browser tab title & icon)
 st.set_page_config(
-    page_title="My zybo AI Assistant",  # Change the browser tab title
-    page_icon="🤖",                        # Change the browser icon (emoji)
-    layout="centered"                     # Options: "centered" or "wide"
+    page_title="My Zybo AI Assistant",
+    page_icon="🤖",
+    layout="centered"
 )
 
-# 2. Main Page Header
-st.title("🤖 My Zybo AI Assistant")
+# 2. Display Zybo Logo and Header
+if os.path.exists("logo.png"):
+    st.image("logo.png", width=220)  # Adjust width as needed
+
+st.title("My Zybo AI Assistant")
 st.caption("Powered by Google Gemini")
 
 # 3. Local File for Storing Chat History
@@ -65,5 +68,5 @@ if user_input := st.chat_input("Ask me anything..."):
     with st.chat_message("assistant"):
         st.markdown(response.text)
 
-    # Save the updated conversation to the local file
+    # Save the updated conversation to local file
     save_chat_history(st.session_state.messages)
